@@ -1,0 +1,51 @@
+# Compiled binaries
+*.o
+*.out
+*.exe
+vector_add
+debug_demo
+thread_debug
+assert_debug
+timing_demo
+bandwidth_test
+occupancy_demo
+vector_add_debug
+vector_add_debug_modified
+vector_add_modified
+rocprof_demo
+coalescing_test
+occupancy_test
+
+# Intermediate build files
+*.s
+*.bc
+*.ll
+*.hipfb
+*.cubin
+*.fatbin
+
+# Build directories
+build/
+out/
+
+# Editor/IDE
+.vscode/settings.json
+*.swp
+*.swo
+*~
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Profiling output
+rocprof_*/
+*.csv
+*.json
+*.txt
+!README.txt
+
+# Temporary files
+*.tmp
+*.log
