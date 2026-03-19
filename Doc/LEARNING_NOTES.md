@@ -12,7 +12,6 @@
 
 | 文档 | 用途 | 适合场景 |
 |------|------|---------|
-| [LEARNING_PATH.md](LEARNING_PATH.md) | 完整学习路径 | 规划学习进度 |
 | [ROCGDB_CHEATSHEET.md](ROCGDB_CHEATSHEET.md) | rocgdb 命令速查 | 调试时快速查阅 |
 | [CheckDisam.md](CheckDisam.md) | GPU 汇编和反汇编对比 | 理解优化等级差异 |
 | [MODIFY_KERNEL_ISA.md](MODIFY_KERNEL_ISA.md) | 修改 GPU ISA 并调试 | 底层指令修改和验证 |
@@ -817,7 +816,6 @@ rocgdb ./vector_add_debug_modified
 
 ### 项目内文档
 
-- [完整学习路径](LEARNING_PATH.md) - 2周速成计划和工具链指南
 - [rocgdb 速查表](ROCGDB_CHEATSHEET.md) - 命令快速参考
 - [汇编和反汇编对比](CheckDisam.md) - 理解优化等级差异
 - [修改 GPU ISA 并调试](MODIFY_KERNEL_ISA.md) - 手动修改 kernel 指令

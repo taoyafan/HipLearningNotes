@@ -18,17 +18,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 3. 为 ROCm 开源项目贡献代码
 4. GPGPU 特有算法（Reduction, Scan, 稀疏矩阵, 图算法）
 
-**📖 详细学习路径**: 见 [Doc/LEARNING_PATH.md](Doc/LEARNING_PATH.md) - 包含 2 周速成计划和完整工具链指南
+**📖 学习笔记**: 见 [Doc/LEARNING_NOTES.md](Doc/LEARNING_NOTES.md) - 核心概念、调试技巧和性能分析总结
 
 ## 项目结构
 
 ```
 hip_learning/
 ├── Doc/                     # 📁 项目文档
-│   ├── LEARNING_PATH.md         # 完整学习路径和工具指南
+│   ├── LEARNING_NOTES.md        # 学习笔记总结
 │   ├── ROCGDB_CHEATSHEET.md     # rocgdb 命令速查表
 │   ├── GPU_DISASSEMBLY.md       # GPU 汇编和反汇编对比
-│   └── LEARNING_NOTES.md        # 学习笔记总结
+│   └── MODIFY_KERNEL_ISA.md     # 修改 GPU ISA 指南
 ├── 01_vector_add/           # ✅ 基础示例：向量加法
 ├── 02_debug_example/        # ✅ 调试技巧示例
 │   ├── debug_demo.cpp           # 演示竞态条件和原子操作

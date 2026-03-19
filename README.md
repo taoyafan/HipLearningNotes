@@ -120,7 +120,7 @@ __global__ void kernel(float* data, int N) {
 3. **性能** - 完成 `03_profiling_and_perf` 各模块
 4. **进阶** - 修改 GPU ISA，深入理解底层执行
 
-详细学习计划：[Doc/LEARNING_PATH.md](Doc/LEARNING_PATH.md)
+详细笔记：[Doc/LEARNING_NOTES.md](Doc/LEARNING_NOTES.md)
 
 ## 关键发现
 
