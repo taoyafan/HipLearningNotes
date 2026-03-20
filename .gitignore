@@ -41,6 +41,8 @@ Thumbs.db
 
 # Profiling output
 rocprof_*/
+att_output/
+att_trace/
 *.csv
 *.json
 *.txt

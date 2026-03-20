@@ -812,6 +812,78 @@ rocgdb ./vector_add_debug_modified
 
 ---
 
+## 12. Advanced Thread Trace (ATT) 指令级追踪（2026-03-20）
+
+### 什么是 ATT
+
+**Advanced Thread Trace** 是 rocprofv3 的指令级追踪功能，可以分析 wavefront 的每条指令执行时间。
+
+### 安装 rocprof-trace-decoder
+
+ROCm 7.2 默认不包含 ATT 解码器，需要单独安装：
+
+```bash
+# 下载 (Ubuntu 24.04)
+curl -L -o /tmp/rocprof-trace-decoder.deb \
+  "https://github.com/ROCm/rocprof-trace-decoder/releases/download/0.1.6/rocprof-trace-decoder-ubuntu-24.04-0.1.6-Linux.deb"
+
+# 安装
+sudo dpkg -i /tmp/rocprof-trace-decoder.deb
+
+# 验证安装位置
+ls /opt/rocm/lib/librocprof-trace-decoder.so
+```
+
+> GitHub 仓库：https://github.com/ROCm/rocprof-trace-decoder
+
+### 使用 ATT
+
+```bash
+# 基本用法
+rocprofv3 --att -d ./att_output -- ./your_program
+
+# 指定目标 CU
+rocprofv3 --att --att-target-cu 0 -- ./program
+
+# 连续追踪多个 kernel
+rocprofv3 --att --att-consecutive-kernels 3 -- ./program
+```
+
+### 输出文件
+
+| 文件类型 | 说明 |
+|----------|------|
+| `*.att` | 原始二进制追踪数据 |
+| `*_code_object_*.out` | Kernel ELF 代码对象 |
+| `*_results.db` | SQLite 结果数据库 |
+| `ui_output_*/` | 解码后的 JSON（用于可视化） |
+
+### 可视化工具
+
+**ROCprof Compute Viewer (RCV)** - AMD 官方可视化工具：
+
+```bash
+# 安装
+pip install rocprof-compute-viewer
+
+# 启动
+rcv ./att_output/ui_output_agent_XXX_dispatch_Y/
+```
+
+功能：
+- Hotspot 分析（指令延迟热点）
+- Wave States（IDLE, EXEC, STALL, WAIT）
+- Memory Ops 依赖分析
+
+> 文档：https://rocm.docs.amd.com/projects/rocprof-compute-viewer/
+
+### 注意事项
+
+- Kernel 执行太快时追踪数据很少，建议用计算密集型程序测试
+- `dispatch_1` 通常是 HIP runtime 内部初始化 kernel，你的 kernel 在后续 dispatch
+
+---
+
 ## 🔗 相关资源
 
 ### 项目内文档
@@ -864,5 +936,5 @@ disassemble /m      # 混合源码和汇编
 
 ---
 
-最后更新：2026-03-17
+最后更新：2026-03-20
 基于：ROCm 7.2.26015, rocgdb 16.3, AMD RX 9070 XT (gfx1201)
