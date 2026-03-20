@@ -860,22 +860,54 @@ rocprofv3 --att --att-consecutive-kernels 3 -- ./program
 
 ### 可视化工具
 
-**ROCprof Compute Viewer (RCV)** - AMD 官方可视化工具：
+**ROCprof Compute Viewer (RCV)** - AMD 官方 ATT 可视化工具（Qt6 GUI）。
+
+> ⚠️ pip 安装不可用，需要从源码编译。
+
+**安装依赖** (Ubuntu 24.04)：
 
 ```bash
-# 安装
-pip install rocprof-compute-viewer
-
-# 启动
-rcv ./att_output/ui_output_agent_XXX_dispatch_Y/
+sudo apt install -y libgl1 qt6-base-dev qmake6 build-essential cmake \
+    libxkbcommon-dev qt6-tools-dev-tools
 ```
 
-功能：
+**从源码编译**：
+
+```bash
+cd ~
+git clone https://github.com/ROCm/rocprof-compute-viewer.git
+cd rocprof-compute-viewer
+mkdir build && cd build
+cmake .. -DQT_VERSION_MAJOR=6
+make -j$(nproc)
+
+# 添加到 PATH
+echo 'export PATH="$HOME/rocprof-compute-viewer/build:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**使用**：
+
+```bash
+# RCV 读取的是 ui_output_* 文件夹，不是 .att 文件
+rocprof-compute-viewer ./att_output/ui_output_agent_XXX_dispatch_Y/
+```
+
+**ui_output 文件夹结构**：
+
+| 文件 | 说明 |
+|------|------|
+| `code.json` | ISA 指令和 latency 数据 |
+| `filenames.json` | GPU 信息和 wave 文件列表 |
+| `occupancy.json` | dispatch 信息 |
+| `*.wave` | wave trace 数据 |
+
+**功能**：
 - Hotspot 分析（指令延迟热点）
 - Wave States（IDLE, EXEC, STALL, WAIT）
 - Memory Ops 依赖分析
 
-> 文档：https://rocm.docs.amd.com/projects/rocprof-compute-viewer/
+> GitHub：https://github.com/ROCm/rocprof-compute-viewer
 
 ### 注意事项
 
